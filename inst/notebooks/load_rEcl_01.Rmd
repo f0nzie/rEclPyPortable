@@ -1,0 +1,114 @@
+---
+title: "restools with R functions"
+output: html_notebook
+---
+
+```{r}
+library(reticulate)
+
+py_config()
+
+reticulate::use_condaenv("pyres", required = TRUE)
+reticulate::py_config()
+```
+
+
+
+```{r}
+library(rEcl)
+
+proj_root <- rprojroot::find_rstudio_root_file()
+unsmry_file <- file.path(proj_root, "inst/python/volve/VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{r}
+py <- restools_connect()
+parser <- EclBinaryParser(py, unsmry_file)
+parser
+```
+
+
+
+
+```{r}
+get_dimensions(parser)
+```
+
+```{r}
+actnum <- get_actnum(parser)
+head(actnum,50)
+```
+
+
+```{r}
+get_seqnum_dates(parser)
+```
+
+
+```{r}
+vectors <- read_vectors(parser)
+```
+
+
+## new functions in R
+
+```{r}
+get_vectors_shape(parser)
+```
+
+```{r}
+get_vector_names(parser)
+```
+
+```{r}
+get_vector_column(parser, "FOPR")
+```
+
+```{r}
+# get several vectors at once
+df_wat <- get_vector_column(parser, c("FWPR", "FWPT", "FWIT"))
+class(df_wat)
+```
+
+```{r}
+# get the last 6 rows
+tail(df_wat, 6)
+```
+
+```{r}
+# get several vectors at once
+df_oil <- get_vector_column(parser, c("FOPR", "FOPT", "FOPTH"))
+tail(df_oil, 20)
+```
+
+
+
+## new functions in Python
+
+```{r}
+# new function implemented in Python class
+parser$model$get_vectors_shape()
+```
+
+```{r}
+# new function
+parser$model$get_vector_names()
+```
+
+```{r}
+parser$model$get_vector_column("FOPR")
+```
+
+```{r}
+# vectorizing the function
+cols <- c("FOPR", "FOPT", "FPR")
+
+df <- sapply(cols, parser$model$get_vector_column, USE.NAMES = FALSE)
+do.call(data.frame, df)
+```
+
+
+
+
+
