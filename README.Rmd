@@ -67,33 +67,31 @@ You can find a copy of these files in this repository under [rEcl/inst/python/vo
 
 ## Examples
 
+
 ### Example reservoir model SPE6
 
 We start by reading the file `SPE6_FRAC.UNSMRY`. This file , because is relatively small, we can include it with the package. We willread it from the package installation folder.
 
 ```{r}
-list.files(system.file("py-project",  package = "rEclTest"))
+list.files(system.file("py-project",  package = "rEclPyPortable"))
 ```
 
 
 ```{r}
 library(reticulate)
 
-# reticulate::use_condaenv("pyres", required = TRUE)
-# reticulate::py_config()
 venv_dir <- system.file("py-project", "WPy64-3670Zero", "python-3.6.7.amd64",
-                        package = "rEclTest")
+                        package = "rEclPyPortable")
 interpreter <- file.path(venv_dir, "python.exe")
 
 reticulate::use_python(interpreter, required = TRUE)
-# reticulate::use_virtualenv(interpreter, required = TRUE)
 reticulate::py_config()
 ```
 
 ```{r}
 library(rEclPyPortable)
 
-ecl_folder <- system.file("rawdata", package = "rEclTest")
+ecl_folder <- system.file("rawdata", package = "rEclPyPortable")
 ecl_folder
 unsmry_file <- file.path(ecl_folder, "spe6", "SPE6_FRAC.UNSMRY")
 file.exists(unsmry_file)
@@ -149,9 +147,10 @@ Finally, because the function `get_vector_column` is vectorized, we can get a da
 
 ```{r}
 # get several vectors at once
-df_vars <- get_vector_column(parser, c("FPR", "FGOR", "FOPR"))
+df_vars <- tibble::as_tibble(get_vector_column(parser, c("FPR", "FGOR", "FOPR")))
 df_vars
 ```
+
 
 
 ## Example reservoir model PUNQ-S3
@@ -163,24 +162,26 @@ PUNQS3.INSPEC
 PUNQS3.RSSPEC
 PUNQS3.SMSPEC
 PUNQS3.UNRST
-PUNQS3.UNSMR
+PUNQS3.UNSMRY
 ```
 
 You may list the files with:
 
 `list.files(system.file("python", "volve", package = "rEcl"))`
 
+
 ```{r}
 library(reticulate)
+library(rEclPyPortable)
 
-reticulate::use_condaenv("pyres", required = TRUE)
+venv_dir <- system.file("py-project", "WPy64-3670Zero", "python-3.6.7.amd64",
+                        package = "rEclPyPortable")
+
+interpreter <- file.path(venv_dir, "python.exe")
+reticulate::use_python(interpreter, required = TRUE)
 reticulate::py_config()
-```
 
-```{r}
-library(rEclTest)
-
-ecl_folder <- system.file("rawdata", package = "rEcl")
+ecl_folder <- system.file("rawdata", package = "rEclPyPortable")
 unsmry_file <- file.path(ecl_folder, "PUNQS3", "PUNQS3.UNSMRY")
 file.exists(unsmry_file)
 ```
@@ -217,7 +218,7 @@ get_vector_column(parser, "FOPR")
 # get a dataframe of multiple columns
 # vectorized function to get several vectors at once
 df_vars <- get_vector_column(parser, c("YEARS", "FGOR", "FOPR", "FWCT"))
-df_vars
+tibble::as_tibble(df_vars)
 ```
 
 Eclipse vectors that are different in nature, such as well (start with __W__) variables, will get a different size than field variables (start with __F__):
@@ -227,3 +228,77 @@ Eclipse vectors that are different in nature, such as well (start with __W__) va
 tibble::as_tibble(get_vector_column(parser, "WBHP"))
 ```
 
+
+
+
+## Example reservoir model Volve
+
+```
+VOLVE_2016.INIT
+VOLVE_2016.RSSPEC
+VOLVE_2016.SMSPEC
+VOLVE_2016.UNSMRY
+```
+
+You may list the files with:
+
+`list.files(system.file("python", "volve", package = "rEcl"))`
+
+```{r}
+library(reticulate)
+library(rEclPyPortable)
+
+venv_dir <- system.file("py-project", "WPy64-3670Zero", "python-3.6.7.amd64",
+                        package = "rEclPyPortable")
+
+interpreter <- file.path(venv_dir, "python.exe")
+reticulate::use_python(interpreter, required = TRUE)
+reticulate::py_config()
+
+# binary files
+ecl_folder <- system.file("rawdata", package = "rEclPyPortable")
+unsmry_file <- file.path(ecl_folder, "volve", "VOLVE_2016.UNSMRY")
+file.exists(unsmry_file)
+```
+
+```{r}
+# connect to Python and start a class instance
+py <- restools_connect()
+parser <- EclBinaryParser(py, unsmry_file)
+
+# dimensions of the reservoir model
+get_dimensions(parser)
+```
+
+```{r read_volve_vectors}
+# reading the Eclipse vectors. 
+# this may take few seconds id the reservoir is too complex
+vectors <- read_vectors(parser)
+
+# Get the shape or dimensions of the vector dataframe.
+get_vectors_shape(parser)
+```
+
+```{r}
+# We get the names of the vectors we specified in our input file.
+get_vector_names(parser)
+```
+
+```{r}
+# dataframe corresponding to a specific vector-column
+# tibble::as_tibble(get_vector_column(parser, "FOPR"))
+```
+
+```{r}
+# get a dataframe of multiple columns
+# vectorized function to get several vectors at once
+df_vars <- get_vector_column(parser, c("YEARS", "FGOR", "FOPR", "FWCT"))
+tibble::as_tibble(df_vars)
+```
+
+Eclipse vectors that are different in nature, such as well (start with __W__) variables, will get a different size than field variables (start with __F__):
+
+```{r}
+# read a well variable
+tibble::as_tibble(get_vector_column(parser, "WBHP"))
+```

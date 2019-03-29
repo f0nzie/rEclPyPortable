@@ -9,7 +9,7 @@ check_python_version <- function(){
         packageStartupMessage("Load error: pysd2r has only been tested with python3...")
         packageStartupMessage("Check to see that RETICULATE_PYTHON points to python3")
         packageStartupMessage("Use the function pysd2r::get_python_info() to check current configuration")
-        stop("Exiting pysd2r.")
+        stop("Exiting rEcl.")
     }
 }
 
@@ -17,7 +17,7 @@ check_python_version <- function(){
 check_restools_present <- function() {
     # ecl_root <- system.file(package = "rEcl")
     cur_dir <- getwd()
-    python_libs_folder <- system.file("py-project", package = "rEclTest")
+    python_libs_folder <- system.file("py-project", package = "rEclPyPortable")
     setwd(python_libs_folder)
     restools <- reticulate::import("restools")
     #return(python_libs_folder)
