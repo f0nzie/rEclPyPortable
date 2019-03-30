@@ -1,4 +1,4 @@
-Package: rEclTest
+Package: rEclPyPortable
 Type: Package
 Title: Convert Reservoir Simulation Output Binary Files from Eclipse to Dataframes
 Version: 0.1.0

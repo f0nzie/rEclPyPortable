@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7659eb6b-b4c9-4f2a-8fec-f8c39067e4c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/tests/test_volve_class_vectors.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+              <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -45,8 +45,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2425" />
-    <option name="y" value="14" />
+    <option name="x" value="2113" />
+    <option name="y" value="13" />
     <option name="width" value="1135" />
     <option name="height" value="1017" />
   </component>
@@ -75,6 +75,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../WinPython/WPy64-3670-mwell/notebooks/perth-april-2019/inst/python/py-multiwell-stats" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -201,11 +202,10 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2425" y="14" width="1135" height="1017" extended-state="0" />
-    <editor active="true" />
+    <frame x="2113" y="13" width="1135" height="1017" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49660632" visible="true" weight="0.2497721" />
-      <window_info id="Structure" order="1" sideWeight="0.50339365" side_tool="true" visible="true" weight="0.2497721" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4954751" visible="true" weight="0.2497721" />
+      <window_info id="Structure" order="1" sideWeight="0.5045249" side_tool="true" visible="true" weight="0.2497721" />
       <window_info id="Favorites" order="2" sideWeight="0.50054526" side_tool="true" weight="0.2497721" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -237,7 +237,7 @@
     <entry file="file://$PROJECT_DIR$/tests/test_volve_class_vectors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
